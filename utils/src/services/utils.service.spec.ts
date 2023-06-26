@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NgxCoreService } from './ngx-core.service';
+import { UtilsService } from './utils.service';
 
-describe('NgxCoreService', () => {
-  let service: NgxCoreService;
+describe('UtilsService', () => {
+  let service: UtilsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(NgxCoreService);
+    service = TestBed.inject(UtilsService);
   });
 
   it('should be created', () => {

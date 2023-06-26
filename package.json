@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "license": "MIT",
   "description": "Angular @annuadvent/ngx-core components library",
-  "homepage": "https://github.com/sunildivyam/[new-lib-name]",
-  "bugs": "https://github.com/sunildivyam/[new-lib-name]/issues",
+  "homepage": "https://github.com/sunildivyam/ngx-core",
+  "bugs": "https://github.com/sunildivyam/ngx-core/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sunildivyam/[new-lib-name].git"
+    "url": "https://github.com/sunildivyam/ngx-core.git"
   },
   "engines": {
     "node": "18.16.0",
