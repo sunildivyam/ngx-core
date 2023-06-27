@@ -1,5 +1,10 @@
 # @annuadvent/ngx-core
 
+## What this ngx-core library should contain:
+    - ngx-core should have fully independent modules/services/interfaces/pipes/constants etc.
+    - It should not contain UI components. Better define them in ngx-common-ui or other specefic library projects.
+
+
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.0.
 
 ## Code scaffolding
