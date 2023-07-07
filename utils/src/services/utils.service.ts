@@ -12,7 +12,7 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class UtilsService {
-  constructor() {}
+  constructor() { }
 
   /**
    * Returns the current Date from browser in the ISO format.
@@ -56,7 +56,7 @@ export class UtilsService {
         const dt = new Date(dateStr);
         timeStr = dt.getTime().toString();
       }
-    } catch (err) {}
+    } catch (err) { }
 
     return timeStr;
   }
@@ -76,7 +76,7 @@ export class UtilsService {
       if (timeStr) {
         dateStr = new Date(Number(timeStr)).toISOString();
       }
-    } catch (err) {}
+    } catch (err) { }
 
     return dateStr;
   }
@@ -253,5 +253,33 @@ export class UtilsService {
     return baseUrl
       ? `${baseUrl}${catId}${articleSegment}`
       : `${catId}${articleSegment}`;
+  }
+
+  /**
+   * Replaces single quotes in a string with double quotes.
+   * @param str
+   * @returns
+   */
+  public replaceSingleWithDoubleQuotes(str: string): string {
+    if (!str) return str;
+    str = str.replace(/'/g, '"');
+
+    return str;
+  }
+
+  /**
+   * Strips out starting and ending single/double quotes from a string.
+   * @param str
+   * @returns
+   */
+  public stripsOutQuotesFromStartAndEnd(str: string): string {
+    if (!str) return str;
+
+    if ((str.startsWith("'") && str.endsWith("'")) || (str.startsWith('\"') && str.endsWith('\"'))) {
+      str = str.substring(1);
+      str = str.substring(0, str.length - 1);
+    }
+
+    return str;
   }
 }
