@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../interfaces/app-config.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { AppConfig } from '../interfaces/app-config.interface';
 export class AppConfigService {
   private _appConfig: AppConfig = null;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
 
   public get config(): AppConfig {

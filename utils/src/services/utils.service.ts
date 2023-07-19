@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { FirebaseStoreConfig } from '../../firebase/firebase.interface';
-// import { LibConfig } from '../../app-config/app-config.interface';
-// import { ImageFileInfo } from '../../components/common-ui/image-browser/image-browser.interface';
 
 /**
  * UtilsService exports all the methods that provides some common utility.
@@ -284,4 +281,15 @@ export class UtilsService {
 
     return str;
   }
+
+  /**
+   * Gives a natural comma separetd string from an array of strings.
+   * Last comma in the string is replaced with 'and', being a natural language string.
+   * @param stringArray
+   * @returns string
+   */
+  public nauturalJoinArray(stringArray: Array<string>): string {
+    return `${stringArray.slice(0, stringArray.length - 1).join(', ')} and ${stringArray[stringArray.length - 1]}`;
+  }
+
 }

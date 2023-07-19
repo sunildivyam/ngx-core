@@ -3,6 +3,7 @@ export interface AppConfig {
     copyrightText: string;
     themeName: string;
     adminEmail?: string;
+    siteEmail?: string;
     defaultPageSize: number;
     metaInfo: any;
     mainMenuItems: Array<any>;
