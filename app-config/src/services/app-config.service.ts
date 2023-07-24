@@ -38,4 +38,8 @@ export class AppConfigService {
   public set firebase(v: any) {
     this._appConfig.firebase = v;
   }
+
+  public getConfigById(id: string): any {
+    return this._appConfig[id];
+  }
 }
