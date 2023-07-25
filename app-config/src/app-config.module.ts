@@ -1,6 +1,6 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LibConfig } from './classes/lib-config.class';
+import { RouterModule } from '@angular/router';
 
 
 /**
@@ -14,24 +14,13 @@ import { LibConfig } from './classes/lib-config.class';
  */
 @NgModule({
   declarations: [],
+  providers: [],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
   ],
   exports: [],
 })
 export class AppConfigModule {
-  constructor(@Optional() @SkipSelf() parentModule?: AppConfigModule) {
-    if (parentModule) {
-      throw new Error('AppConfigModule is already loaded. Import it in the appModule only');
-    }
-  }
-
-  static forRoot(libConfig: LibConfig): ModuleWithProviders<AppConfigModule> {
-    return {
-      ngModule: AppConfigModule,
-      providers: [
-        { provide: LibConfig, useValue: libConfig }
-      ]
-    };
-  }
+  constructor() { }
 }

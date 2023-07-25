@@ -1,8 +1,8 @@
 {
   "name": "@annuadvent/ngx-core",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "license": "MIT",
-  "description": "Angular @annuadvent/ngx-core components library",
+  "description": "The ngx-core library serves as the foundation for the other libraries in the group. It provides core functionalities and abstractions that are utilized across the entire suite of libraries. This includes common services for handling authentication, API communication, error handling, and state management. Furthermore, ngx-core seamlessly integrates with Firebase, a widely-used backend as a service (BaaS) platform, offering functionalities such as real-time database synchronization, cloud storage, and authentication services.",
   "homepage": "https://github.com/sunildivyam/ngx-core",
   "bugs": "https://github.com/sunildivyam/ngx-core/issues",
   "repository": {
@@ -13,6 +13,16 @@
     "node": "18.16.0",
     "npm": "9.5.1"
   },
+  "keywords": [
+    "Angular",
+    "Angular library",
+    "Angular components",
+    "Angular components core library",
+    "ngx-core",
+    "TypeScript",
+    "javascript",
+    "javascript framework"
+  ],
   "peerDependencies": {
     "@angular/common": "^16.1.0",
     "@angular/core": "^16.1.0"

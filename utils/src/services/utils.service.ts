@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-// import { FirebaseStoreConfig } from '../../firebase/firebase.interface';
-// import { LibConfig } from '../../app-config/app-config.interface';
-// import { ImageFileInfo } from '../../components/common-ui/image-browser/image-browser.interface';
 
 /**
  * UtilsService exports all the methods that provides some common utility.
@@ -10,9 +7,11 @@ import { Injectable } from '@angular/core';
  * @class UtilsService
  * @typedef {UtilsService}
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UtilsService {
-  constructor() {}
+  constructor() { }
 
   /**
    * Returns the current Date from browser in the ISO format.
@@ -56,7 +55,7 @@ export class UtilsService {
         const dt = new Date(dateStr);
         timeStr = dt.getTime().toString();
       }
-    } catch (err) {}
+    } catch (err) { }
 
     return timeStr;
   }
@@ -76,7 +75,7 @@ export class UtilsService {
       if (timeStr) {
         dateStr = new Date(Number(timeStr)).toISOString();
       }
-    } catch (err) {}
+    } catch (err) { }
 
     return dateStr;
   }
@@ -254,4 +253,43 @@ export class UtilsService {
       ? `${baseUrl}${catId}${articleSegment}`
       : `${catId}${articleSegment}`;
   }
+
+  /**
+   * Replaces single quotes in a string with double quotes.
+   * @param str
+   * @returns
+   */
+  public replaceSingleWithDoubleQuotes(str: string): string {
+    if (!str) return str;
+    str = str.replace(/'/g, '"');
+
+    return str;
+  }
+
+  /**
+   * Strips out starting and ending single/double quotes from a string.
+   * @param str
+   * @returns
+   */
+  public stripsOutQuotesFromStartAndEnd(str: string): string {
+    if (!str) return str;
+
+    if ((str.startsWith("'") && str.endsWith("'")) || (str.startsWith('\"') && str.endsWith('\"'))) {
+      str = str.substring(1);
+      str = str.substring(0, str.length - 1);
+    }
+
+    return str;
+  }
+
+  /**
+   * Gives a natural comma separetd string from an array of strings.
+   * Last comma in the string is replaced with 'and', being a natural language string.
+   * @param stringArray
+   * @returns string
+   */
+  public nauturalJoinArray(stringArray: Array<string>): string {
+    return `${stringArray.slice(0, stringArray.length - 1).join(', ')} and ${stringArray[stringArray.length - 1]}`;
+  }
+
 }
