@@ -25,6 +25,9 @@ export interface AppConfig {
     // Openai
     openai?: any;
 
+    // Openai
+    socialMedia?: any;
+
     // Any custom key value
     [key: string]: any,
 }
