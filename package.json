@@ -1,6 +1,6 @@
 {
   "name": "@annuadvent/ngx-core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "description": "The ngx-core library serves as the foundation for the other libraries in the group. It provides core functionalities and abstractions that are utilized across the entire suite of libraries. This includes common services for handling authentication, API communication, error handling, and state management. Furthermore, ngx-core seamlessly integrates with Firebase, a widely-used backend as a service (BaaS) platform, offering functionalities such as real-time database synchronization, cloud storage, and authentication services.",
   "homepage": "https://github.com/sunildivyam/ngx-core",
@@ -10,8 +10,8 @@
     "url": "https://github.com/sunildivyam/ngx-core.git"
   },
   "engines": {
-    "node": "18.16.0",
-    "npm": "9.5.1"
+    "node": "18.17.0",
+    "npm": "9.6.7"
   },
   "keywords": [
     "Angular",
