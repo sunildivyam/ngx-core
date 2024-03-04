@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 /**
  * UtilsService exports all the methods that provides some common utility.
@@ -8,10 +8,46 @@ import { Injectable } from '@angular/core';
  * @typedef {UtilsService}
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UtilsService {
-  constructor() { }
+  constructor() {}
+
+  /**
+   * Joins the Url segments and forms a url, stripes out any trailing extra slashes from the segments before joing them.
+   * @param urlSegments
+   * @returns joined Urls
+   */
+  public joinUrl(urlSegments: Array<string>): string {
+    const cleanedSegmenmts = urlSegments.map((str, index) => {
+      let cleanSegment = str;
+
+      switch (index) {
+        case 0:
+          if (str.endsWith("/")) {
+            cleanSegment = str.substring(0, str.length - 2);
+          }
+          break;
+        case urlSegments.length - 1:
+          if (str.startsWith("/")) {
+            cleanSegment = str.substring(1, str.length);
+          }
+          break;
+        default:
+          if (cleanSegment.endsWith("/")) {
+            cleanSegment = cleanSegment.substring(0, cleanSegment.length - 2);
+          }
+
+          if (cleanSegment.startsWith("/")) {
+            cleanSegment = cleanSegment.substring(1, cleanSegment.length);
+          }
+      }
+
+      return cleanSegment;
+    });
+
+    return cleanedSegmenmts.join("/");
+  }
 
   /**
    * Returns the current Date from browser in the ISO format.
@@ -32,11 +68,11 @@ export class UtilsService {
    * @param {string} date
    * @returns {string}
    */
-  public dateToLocalString(date: string = ''): string {
-    if (!date) return '';
-    const options: any = { year: 'numeric', month: 'short', day: 'numeric' };
+  public dateToLocalString(date: string = ""): string {
+    if (!date) return "";
+    const options: any = { year: "numeric", month: "short", day: "numeric" };
     const dt = new Date(date);
-    return dt.toLocaleDateString('en-US', options);
+    return dt.toLocaleDateString("en-US", options);
   }
 
   /**
@@ -48,14 +84,14 @@ export class UtilsService {
    * @returns {string}
    */
   public dateStringToTotalTimeString(dateStr: string): string {
-    let timeStr = '';
+    let timeStr = "";
 
     try {
       if (dateStr) {
         const dt = new Date(dateStr);
         timeStr = dt.getTime().toString();
       }
-    } catch (err) { }
+    } catch (err) {}
 
     return timeStr;
   }
@@ -69,13 +105,13 @@ export class UtilsService {
    * @returns {string}
    */
   public totalTimeStringToUTCdateString(timeStr: string): string {
-    let dateStr = '';
+    let dateStr = "";
 
     try {
       if (timeStr) {
         dateStr = new Date(Number(timeStr)).toISOString();
       }
-    } catch (err) { }
+    } catch (err) {}
 
     return dateStr;
   }
@@ -89,14 +125,14 @@ export class UtilsService {
    * @returns {string}
    */
   public getStringWithNoSpecialChars(str: string): string {
-    if (!str) return '';
-    const strArr = str.split('');
+    if (!str) return "";
+    const strArr = str.split("");
     const filteredStr = strArr.filter((char) => {
       if (
-        (char >= 'A' && char <= 'Z') ||
-        (char >= 'a' && char <= 'z') ||
-        (char >= '0' && char <= '9') ||
-        char === ' '
+        (char >= "A" && char <= "Z") ||
+        (char >= "a" && char <= "z") ||
+        (char >= "0" && char <= "9") ||
+        char === " "
       ) {
         return true;
       } else {
@@ -104,7 +140,7 @@ export class UtilsService {
       }
     });
 
-    return filteredStr.join('');
+    return filteredStr.join("");
   }
 
   /**
@@ -116,15 +152,15 @@ export class UtilsService {
    * @returns {string}
    */
   public trimConsecutiveSpaces(str: string): string {
-    if (!str) return '';
+    if (!str) return "";
 
     return str
-      .split('')
+      .split("")
       .filter((char, index) => {
-        if (char === ' ') {
+        if (char === " ") {
           if (index === str.length - 1) {
             return false;
-          } else if (str[index + 1] === ' ') {
+          } else if (str[index + 1] === " ") {
             return false;
           } else {
             return true;
@@ -133,7 +169,7 @@ export class UtilsService {
           return true;
         }
       })
-      .join('');
+      .join("");
   }
 
   /**
@@ -143,13 +179,13 @@ export class UtilsService {
    * @param title
    * @returns
    */
-  public toDashedString(title: string = ''): string {
+  public toDashedString(title: string = ""): string {
     // trims additional spaces from a string.
     const spacesTrimmedStr = this.trimConsecutiveSpaces(title);
     // Stripe out all special characters from the string too except A-Z, a-z, 0-9.
     const titleWithNoSpecialChars =
       this.getStringWithNoSpecialChars(spacesTrimmedStr);
-    return titleWithNoSpecialChars.split(' ').join('-').toLocaleLowerCase();
+    return titleWithNoSpecialChars.split(" ").join("-").toLocaleLowerCase();
   }
 
   /**
@@ -160,17 +196,17 @@ export class UtilsService {
    * @param {number} top
    */
   public scrollTo(top: number = 0) {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.scrollTo({ top: top });
     }
   }
 
   public getTrimmedStringByChars(str: string, count: number = 0): string {
-    if (!str || typeof str !== 'string' || !count || count <= 0) {
+    if (!str || typeof str !== "string" || !count || count <= 0) {
       return str;
     }
 
-    return str.substring(0, count) + '...';
+    return str.substring(0, count) + "...";
   }
 
   /**
@@ -181,7 +217,7 @@ export class UtilsService {
    * @param {string} [str='']
    * @returns {string}
    */
-  public getUniqueFromString(str: string = ''): string {
+  public getUniqueFromString(str: string = ""): string {
     const dashed = this.toDashedString(str);
     const rndStr = Math.random().toString(36).substring(2);
     const uniqueId =
@@ -224,10 +260,10 @@ export class UtilsService {
   public getImageUrl(
     imageFullPath: string,
     imageApiEndpoint: string,
-    baseUrl: string = ''
+    baseUrl: string = ""
   ): string {
     const imageApiUrl = `${imageApiEndpoint}${imageFullPath}`;
-    return baseUrl ? `${baseUrl}${imageApiUrl}` : imageApiUrl;
+    return baseUrl ? this.joinUrl([baseUrl, imageApiUrl]) : imageApiUrl;
   }
 
   /**
@@ -244,13 +280,13 @@ export class UtilsService {
    */
   public getCanonicalUrl(
     categoryid: string,
-    articleId: string = '',
-    baseUrl: string = ''
+    articleId: string = "",
+    baseUrl: string = ""
   ): string {
-    const articleSegment = articleId ? `/${articleId}` : '';
-    const catId = categoryid.indexOf('/') === 0 ? categoryid : `/${categoryid}`;
+    const articleSegment = articleId ? `/${articleId}` : "";
+    const catId = categoryid.indexOf("/") === 0 ? categoryid : `/${categoryid}`;
     return baseUrl
-      ? `${baseUrl}${catId}${articleSegment}`
+      ? this.joinUrl([baseUrl, catId, articleSegment])
       : `${catId}${articleSegment}`;
   }
 
@@ -274,7 +310,10 @@ export class UtilsService {
   public stripsOutQuotesFromStartAndEnd(str: string): string {
     if (!str) return str;
 
-    if ((str.startsWith("'") && str.endsWith("'")) || (str.startsWith('\"') && str.endsWith('\"'))) {
+    if (
+      (str.startsWith("'") && str.endsWith("'")) ||
+      (str.startsWith('"') && str.endsWith('"'))
+    ) {
       str = str.substring(1);
       str = str.substring(0, str.length - 1);
     }
@@ -289,7 +328,8 @@ export class UtilsService {
    * @returns string
    */
   public nauturalJoinArray(stringArray: Array<string>): string {
-    return `${stringArray.slice(0, stringArray.length - 1).join(', ')} and ${stringArray[stringArray.length - 1]}`;
+    return `${stringArray.slice(0, stringArray.length - 1).join(", ")} and ${
+      stringArray[stringArray.length - 1]
+    }`;
   }
-
 }
