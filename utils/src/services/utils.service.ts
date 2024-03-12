@@ -8,10 +8,61 @@ import { Injectable } from '@angular/core';
  * @typedef {UtilsService}
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UtilsService {
-  constructor() { }
+  constructor() {}
+
+  //
+
+  /**
+   * Replaces all upperCase letters to lowercase precided with '-' dash
+   * @param str
+   * @returns dashed string
+   */
+  public camelCaseToDashCase(str: string): string {
+    if (!str) return '';
+    return str
+      .split('')
+      .map((c) => (c === c.toUpperCase() ? `-${c.toLowerCase()}` : c))
+      .join('');
+  }
+
+  /**
+   * Joins the Url segments and forms a url, stripes out any trailing extra slashes from the segments before joing them.
+   * @param urlSegments
+   * @returns joined Urls
+   */
+  public joinUrl(urlSegments: Array<string>): string {
+    const cleanedSegmenmts = urlSegments.map((str, index) => {
+      let cleanSegment = str;
+
+      switch (index) {
+        case 0:
+          if (str.endsWith('/')) {
+            cleanSegment = str.substring(0, str.length - 2);
+          }
+          break;
+        case urlSegments.length - 1:
+          if (str.startsWith('/')) {
+            cleanSegment = str.substring(1, str.length);
+          }
+          break;
+        default:
+          if (cleanSegment.endsWith('/')) {
+            cleanSegment = cleanSegment.substring(0, cleanSegment.length - 2);
+          }
+
+          if (cleanSegment.startsWith('/')) {
+            cleanSegment = cleanSegment.substring(1, cleanSegment.length);
+          }
+      }
+
+      return cleanSegment;
+    });
+
+    return cleanedSegmenmts.join('/');
+  }
 
   /**
    * Returns the current Date from browser in the ISO format.
@@ -55,7 +106,7 @@ export class UtilsService {
         const dt = new Date(dateStr);
         timeStr = dt.getTime().toString();
       }
-    } catch (err) { }
+    } catch (err) {}
 
     return timeStr;
   }
@@ -75,7 +126,7 @@ export class UtilsService {
       if (timeStr) {
         dateStr = new Date(Number(timeStr)).toISOString();
       }
-    } catch (err) { }
+    } catch (err) {}
 
     return dateStr;
   }
@@ -227,7 +278,7 @@ export class UtilsService {
     baseUrl: string = ''
   ): string {
     const imageApiUrl = `${imageApiEndpoint}${imageFullPath}`;
-    return baseUrl ? `${baseUrl}${imageApiUrl}` : imageApiUrl;
+    return baseUrl ? this.joinUrl([baseUrl, imageApiUrl]) : imageApiUrl;
   }
 
   /**
@@ -250,7 +301,7 @@ export class UtilsService {
     const articleSegment = articleId ? `/${articleId}` : '';
     const catId = categoryid.indexOf('/') === 0 ? categoryid : `/${categoryid}`;
     return baseUrl
-      ? `${baseUrl}${catId}${articleSegment}`
+      ? this.joinUrl([baseUrl, catId, articleSegment])
       : `${catId}${articleSegment}`;
   }
 
@@ -274,7 +325,10 @@ export class UtilsService {
   public stripsOutQuotesFromStartAndEnd(str: string): string {
     if (!str) return str;
 
-    if ((str.startsWith("'") && str.endsWith("'")) || (str.startsWith('\"') && str.endsWith('\"'))) {
+    if (
+      (str.startsWith("'") && str.endsWith("'")) ||
+      (str.startsWith('"') && str.endsWith('"'))
+    ) {
       str = str.substring(1);
       str = str.substring(0, str.length - 1);
     }
@@ -289,7 +343,8 @@ export class UtilsService {
    * @returns string
    */
   public nauturalJoinArray(stringArray: Array<string>): string {
-    return `${stringArray.slice(0, stringArray.length - 1).join(', ')} and ${stringArray[stringArray.length - 1]}`;
+    return `${stringArray.slice(0, stringArray.length - 1).join(', ')} and ${
+      stringArray[stringArray.length - 1]
+    }`;
   }
-
 }
